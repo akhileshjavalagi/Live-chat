@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {contactList} from "../MockData"
 
 const Container = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const ContactItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 540px;
   background: white;
   cursor: pointer;
   :hover {
@@ -65,8 +66,8 @@ const ContactItem = styled.div`
 `;
 
 const ProfileIcon = styled(ProfileImage)`
-  width: 38px;
-  height: 38px;
+  width: 50px;
+  height: 45px;
   border-radius: 50%;
   margin-left: 12px;
   margin-top: 15px;
@@ -99,24 +100,29 @@ const MessageTime = styled.span`
   white-space: nowrap;
 `;
 
-const ContactComponent = () =>{
-    return <ContactItem>
-        <ProfileIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Sudeep_interview_TeachAIDS.jpg/330px-Sudeep_interview_TeachAIDS.jpg" />
+const ContactComponent = (props) =>{
+    const {userData, setChat} = props;
+   // console.log("people is",userData)
+    return <ContactItem onClick={()=>{
+      setChat(userData)
+    }}>
+        <ProfileIcon src={userData.profilePic} />
         <ContactInfo>
           <ContactName>
-            Akhilesh Javalagi
+            {userData.name}
           </ContactName>
           <MessageText>
-            Hi How are you?
+            {userData.lastText}
           </MessageText>
         </ContactInfo>
         <MessageTime>
-          5:30PM
+          {userData.lastTextTime}
         </MessageTime>
     </ContactItem>
 }
 
-const ContactList = () => {
+const ContactList = (props) => {
+  //  console.log(contactList.name)
     return (
         <Container>
           <ProfileInfoDiv>
@@ -128,10 +134,11 @@ const ContactList = () => {
                 <SearchInput placeholder='Search the contacts here'/>
             </SearchContainer>
           </SearchBox>
-          <ContactComponent/>
-          <ContactComponent/>
-          <ContactComponent/>
-          <ContactComponent/>
+          {
+            contactList.map((userData) => (
+              <ContactComponent userData={userData} setChat = {props.setChat}/>
+            ))
+          }
         </Container>
     );
 }
