@@ -57,7 +57,6 @@ const ContactItem = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  border-bottom: 1px solid #f2f2f2;
   background: white;
   cursor: pointer;
   :hover {
@@ -75,9 +74,45 @@ const ProfileIcon = styled(ProfileImage)`
   object-fit: cover;
 `;
 
+const ContactInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 12px;
+`;
+
+const ContactName = styled.span`
+  width: 100%;
+  font-size: 16px;
+  color: black;
+`;
+
+const MessageText = styled.span`
+  width: 100%;
+  font-size: 14px;
+  margin-top: 3px;
+`;
+
+const MessageTime = styled.span`
+  font-size: 12px;
+  margin-right: 10px;
+  white-space: nowrap;
+`;
+
 const ContactComponent = () =>{
     return <ContactItem>
         <ProfileIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Sudeep_interview_TeachAIDS.jpg/330px-Sudeep_interview_TeachAIDS.jpg" />
+        <ContactInfo>
+          <ContactName>
+            Akhilesh Javalagi
+          </ContactName>
+          <MessageText>
+            Hi How are you?
+          </MessageText>
+        </ContactInfo>
+        <MessageTime>
+          5:30PM
+        </MessageTime>
     </ContactItem>
 }
 
@@ -93,9 +128,10 @@ const ContactList = () => {
                 <SearchInput placeholder='Search the contacts here'/>
             </SearchContainer>
           </SearchBox>
-          <ContactComponent>
-
-          </ContactComponent>
+          <ContactComponent/>
+          <ContactComponent/>
+          <ContactComponent/>
+          <ContactComponent/>
         </Container>
     );
 }
